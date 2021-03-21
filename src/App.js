@@ -6,13 +6,10 @@ import SinglePockemom from './Component/SinglePockemon';
 function App() {
   return (
     <div className='container'>
-      {/* <h1>Pockdex</h1> */}
-      {/* <ListOfPockemom /> */}
-      {/* <SinglePockemom /> */}
 
     <Router>
         <Link to="/">
-          <h1>Pockdex</h1>
+          <h1>Pokédex</h1>
         </Link>
         <Switch>
             <Route path="/" exact >
