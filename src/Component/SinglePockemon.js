@@ -8,6 +8,13 @@ import {useParams} from 'react-router-dom';
 const SinglePockemom = ({}) =>{
 
     const [ singlepockemon, setSinglePockemon ] = useState([]);
+    const [pokemonImg, setPokemonImg]= useState([]);
+    const [pokemonMoves, setPokemonMoves]= useState([]);
+    const [pokemonAbilitiesFirst, setPokemonAbilitiesFirst]= useState([]);
+    const [pokemonAbilitiesSecond, setPokemonAbilitiesSecond]= useState([]);
+    const [pokemonName, setPokemonName]= useState([]);
+
+
 
     let { id } = useParams();
     console.log("Id is : ",id);
@@ -20,12 +27,23 @@ const SinglePockemom = ({}) =>{
         // const x = poks.results;
         // console.log(x);
         setSinglePockemon (poks);
+        setPokemonImg(poks.sprites);
+        setPokemonMoves(poks.moves);
+        setPokemonAbilitiesFirst(poks.abilities[0].ability.name);
+        setPokemonAbilitiesSecond(poks.abilities[1].ability.name);
+        setPokemonName(poks.species.name);
     };
+
+    console.log("Imges", pokemonImg);
+    console.log("Moves", pokemonMoves);
 
     useEffect(()=>{
         getUsers();
     }, []);
 
+    // const ability = pokemonAbilities.map((items)=>{
+    //     return <span>{items}</span>
+    // })
 
     // const abilities = singlepockemon.abilities.map((item)=>{
     //         return item.name;
@@ -49,14 +67,16 @@ const SinglePockemom = ({}) =>{
                     <div className="detailsPok">
                         {/* <div className="namePok"> PockeMon Name</div> */}
                         <div className="namePok"> 
-                            <img className='img-pok' src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"/>
-                            <div className="name">PockeMon Name</div>
+                            {/* <img className='img-pok' src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"/> */}
+                            <img className='img-pok' src={pokemonImg.front_default}/>
+
+                            <div className="name">{pokemonName}</div>
                         </div>
                         
                         <div className="abilityPok">
                             {/* <div className="title">Abilities <span>{singlepockemon.abilities[0].ability.name} , {singlepockemon.abilities[1].ability.name}</span></div> */}
                             {/* <div className="title">Abilities <span> One , two</span></div> */}
-                            <div className="title">Abilities <span></span></div>
+                            <div className="title">Abilities <span>{pokemonAbilitiesFirst} , {pokemonAbilitiesSecond} </span></div>
 
                         </div>
 
@@ -67,7 +87,7 @@ const SinglePockemom = ({}) =>{
                             <div className="title" >Weight <span>{singlepockemon.weight}</span> </div>
                         </div>
                         <div className="movesPok">
-                            <div className="title">Moves  <span>S</span> </div>
+                            <div className="title">Moves  <span>{pokemonMoves.moves}</span> </div>
                             {/* <p className="text">A</p> */}
                         </div>
                        
